@@ -1,5 +1,7 @@
 const http = require("http");
 const fs = require("fs");
+const html = require("fs").readFileSync("./index.html");
+const html2 = require("fs").readFileSync("./index2.html");
 const PORT = 8000;
 
 const server = http.createServer((req, res) => {
@@ -7,35 +9,11 @@ const server = http.createServer((req, res) => {
   const method = req.method;
 
   if (url === "/") {
-    res.write(`
-          <html>
-              <head>
-                  <title>First Page</title>
-              </head>
-              <body>
-               <h1>Hello Node</h1>
-               <a href='http://localhost:8000/write-message'>TO WRITE MESSAGE</a>
-               <br />
-               <a href='http://localhost:8000/read-message'>TO READ MESSAGE</a>
-              </body>
-          </html>
-      `);
+    res.write(html);
     res.end();
   }
   if (url === "/write-message") {
-    res.write(`
-          <html>
-              <head>
-                  <title>First Page</title>
-              </head>
-              <body>
-                  <form action="/write-message" method='POST'>
-                      <input type="text" name="message" />
-                      <button type="submit">Submit</button>
-                  </form>
-              </body>
-          </html>
-      `);
+    res.write(html2);
     res.end();
   }
 
